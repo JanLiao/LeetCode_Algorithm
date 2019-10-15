@@ -1,4 +1,4 @@
-package com.jan;
+package com.jan.alg;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package com.jan;
+package com.jan.alg;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
