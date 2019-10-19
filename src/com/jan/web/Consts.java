@@ -17,6 +17,10 @@ public class Consts {
 	
 	public static String password_orc = "123654";
 
+	public static String sql_driver = "com.mysql.jdbc.Driver";
+
+	public static String sql_url = "jdbc:mysql://10.22.19.22:3306/label_system?useUnicode=true&characterEncoding=utf-8&useSSL=false";
+
 	public static String username = "root";
 	
 	public static String password = "123456";
