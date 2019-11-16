@@ -48,50 +48,55 @@ public class ConcatenationWords {
         }
         for (int i = 0; i < len - size * offset + 1; i++) {
             String str = s.substring(i, i + size * offset);
-            System.out.println(str);
+            //System.out.println(str);
             Set<Integer> set = new HashSet<>();
             for(int j = 0; j < size; j++){
-                int idx = str.indexOf(words[j]);
-                System.out.println(words[j] + " = " + idx);
-                boolean flag = false;
-                //int pre = idx;
-                while(idx != -1){
-                    if(set.contains(idx)){
-                        idx = str.substring(idx + 1).indexOf(words[j]) + idx + 1;
-                        //System.out.println("cur = " + str + " = " + idx);
-                        //System.out.println("-=" + idx);
-                    }else{
-                        //idx = idx + pre + 1;
-                        if(idx % offset == 0){
-                            System.out.println(idx);
-                            set.add(idx);
-                        }else{
-                            //flag = true;
-                            break;
-                        }
-                    }
+                int idx = getIdx(str, words[j], set, offset);
+                //System.out.println(idx);
+                if(idx == -1) break;
+                if(idx % offset == 0){
+                    //System.out.println(idx);
+                    set.add(idx);
+                }else{
+                    break;
                 }
-//                if(flag){
-//                    break;
-//                }
             }
             if(set.size() == size){
-//                List<Integer> list1 = new ArrayList<Integer>(set);
-//                Collections.sort(list1);
                 list.add(i);
             }
         }
         return list;
     }
 
+    public int getIdx(String str, String sub, Set<Integer> set, int offset){
+        int idx = str.indexOf(sub);
+        if(idx == -1) return -1;
+        while(true){
+            if(idx == -1) return -1;
+            if(!set.contains(idx)){
+                if(idx % offset == 0){
+                    return idx;
+                }else{
+                    idx = str.indexOf(sub, idx + 1);
+                }
+            }else{
+                //System.out.println("cur = " + idx);
+                idx = str.indexOf(sub, idx + offset);
+            }
+        }
+    }
+
     public static void main(String[] args) {
         ConcatenationWords cw = new ConcatenationWords();
         String s = "wordgoodgoodgoodbestword";
-        String[] wd = {"word","good","best","good"};
+        String[] wd = {"word","good","best","word"};
         List<Integer> list = cw.findSubstring(s, wd);
         //System.out.println(s.substring(0));
         for(int i : list){
             System.out.println(i);
         }
+        String ss = "goodgoodbestword";
+        String ss1 = "good";
+        //System.out.println(ss.indexOf(ss1, 4));
     }
 }
